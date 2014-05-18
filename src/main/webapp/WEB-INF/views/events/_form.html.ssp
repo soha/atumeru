@@ -1,0 +1,100 @@
+<%@val s: skinny.Skinny %>
+<%@val keyAndErrorMessages: skinny.KeyAndErrorMessages %>
+
+<%-- Be aware of package imports.
+ 1. src/main/scala/templates/ScalatePackage.scala
+ 2. scalateTemplateConfig in project/Build.scala
+--%>
+
+<div class="form-group">
+  <label class="control-label" for="title">
+    ${s.i18n.get("event.title")}
+  </label>
+  <div class="controls row">
+    <div class="${if(keyAndErrorMessages.hasErrors("title")) "has-error" else ""}">
+      <div class="col-xs-12">
+        <input type="text" name="title" class="form-control" value="${s.params.title}" />
+      </div>
+    </div>
+    #if (keyAndErrorMessages.hasErrors("title"))
+      <div class="col-xs-12 has-error">
+        #for (error <- keyAndErrorMessages.getErrors("title"))
+          <label class="control-label">${error}</label>
+        #end
+      </div>
+    #end
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label">
+    ${s.i18n.get("event.startDateTime")}
+  </label>
+  <div class="controls row">
+    <div class="${if(keyAndErrorMessages.hasErrors("start_date_time")) "has-error" else ""}">
+      <div class="col-xs-2">
+        <input type="text" name="start_date_time_year"   class="form-control" value="${s.params.start_date_time_year}"   placeholder="${s.i18n.get("year")}"  maxlength=4 />
+      </div>
+      <div class="col-xs-2">
+        <input type="text" name="start_date_time_month"  class="form-control" value="${s.params.start_date_time_month}"  placeholder="${s.i18n.get("month")}" maxlength=2 />
+      </div>
+      <div class="col-xs-2">
+        <input type="text" name="start_date_time_day"    class="form-control" value="${s.params.start_date_time_day}"    placeholder="${s.i18n.get("day")}"   maxlength=2 />
+      </div>
+      <div class="col-xs-2">
+        <input type="text" name="start_date_time_hour"   class="form-control" value="${s.params.start_date_time_hour}"   placeholder="${s.i18n.get("hour")}"  maxlength=2 />
+      </div>
+      <div class="col-xs-2">
+        <input type="text" name="start_date_time_minute" class="form-control" value="${s.params.start_date_time_minute}" placeholder="${s.i18n.get("minute")}" maxlength=2 />
+      </div>
+      <div class="col-xs-2">
+        <input type="text" name="start_date_time_second" class="form-control" value="${s.params.start_date_time_second}" placeholder="${s.i18n.get("second")}" maxlength=2 />
+      </div>
+    </div>
+    #if (keyAndErrorMessages.hasErrors("start_date_time"))
+      <div class="col-xs-12 has-error">
+        #for (error <- keyAndErrorMessages.getErrors("start_date_time"))
+          <label class="control-label">${error}</label>
+        #end
+      </div>
+    #end
+  </div>
+</div>
+<div class="form-group">
+  <label class="control-label">
+    ${s.i18n.get("event.endDateTime")}
+  </label>
+  <div class="controls row">
+    <div class="${if(keyAndErrorMessages.hasErrors("end_date_time")) "has-error" else ""}">
+      <div class="col-xs-2">
+        <input type="text" name="end_date_time_year"   class="form-control" value="${s.params.end_date_time_year}"   placeholder="${s.i18n.get("year")}"  maxlength=4 />
+      </div>
+      <div class="col-xs-2">
+        <input type="text" name="end_date_time_month"  class="form-control" value="${s.params.end_date_time_month}"  placeholder="${s.i18n.get("month")}" maxlength=2 />
+      </div>
+      <div class="col-xs-2">
+        <input type="text" name="end_date_time_day"    class="form-control" value="${s.params.end_date_time_day}"    placeholder="${s.i18n.get("day")}"   maxlength=2 />
+      </div>
+      <div class="col-xs-2">
+        <input type="text" name="end_date_time_hour"   class="form-control" value="${s.params.end_date_time_hour}"   placeholder="${s.i18n.get("hour")}"  maxlength=2 />
+      </div>
+      <div class="col-xs-2">
+        <input type="text" name="end_date_time_minute" class="form-control" value="${s.params.end_date_time_minute}" placeholder="${s.i18n.get("minute")}" maxlength=2 />
+      </div>
+      <div class="col-xs-2">
+        <input type="text" name="end_date_time_second" class="form-control" value="${s.params.end_date_time_second}" placeholder="${s.i18n.get("second")}" maxlength=2 />
+      </div>
+    </div>
+    #if (keyAndErrorMessages.hasErrors("end_date_time"))
+      <div class="col-xs-12 has-error">
+        #for (error <- keyAndErrorMessages.getErrors("end_date_time"))
+          <label class="control-label">${error}</label>
+        #end
+      </div>
+    #end
+  </div>
+</div>
+<div class="form-actions">
+  ${unescape(s.csrfHiddenInputTag)}
+  <input type="submit" class="btn btn-primary" value="${s.i18n.get("submit")}">
+  <a class="btn btn-default" href="${s.url(Controllers.events.indexUrl)}">${s.i18n.get("cancel")}</a>
+</div>

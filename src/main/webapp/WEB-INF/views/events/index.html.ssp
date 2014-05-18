@@ -1,0 +1,60 @@
+<%@val s: skinny.Skinny %>
+<%@val items: Seq[model.Event] %>
+<%@val totalPages: Int %>
+
+<%-- Be aware of package imports.
+ 1. src/main/scala/templates/ScalatePackage.scala
+ 2. scalateTemplateConfig in project/Build.scala
+--%>
+
+<h3>${s.i18n.get("event.list")}</h3>
+<hr/>
+#for (notice <- s.flash.notice)
+  <p class="alert alert-info">${notice}</p>
+#end
+
+#if (totalPages > 1)
+  <ul class="pagination">
+    <li>
+      <a href="${s.url(Controllers.events.indexUrl, "page" -> 1)}">&laquo;</a>
+    </li>
+    #for (i <- (1 to totalPages))
+      <li>
+        <a href="${s.url(Controllers.events.indexUrl, "page" -> i)}">${i}</a>
+      </li>
+    #end
+    <li>
+      <a href="${s.url(Controllers.events.indexUrl, "page" -> totalPages)}">&raquo;</a>
+    </li>
+  </ul>
+#end
+
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th>${s.i18n.get("event.id")}</th>
+    <th>${s.i18n.get("event.title")}</th>
+    <th>${s.i18n.get("event.startDateTime")}</th>
+    <th>${s.i18n.get("event.endDateTime")}</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  #for (item <- items)
+  <tr>
+    <td>${item.id}</td>
+    <td>${item.title}</td>
+    <td>${item.startDateTime}</td>
+    <td>${item.endDateTime}</td>
+    <td>
+      <a href="${s.url(Controllers.events.showUrl, "id" -> item.id)}" class="btn btn-default">${s.i18n.get("detail")}</a>
+      <a href="${s.url(Controllers.events.editUrl, "id" -> item.id)}" class="btn btn-info">${s.i18n.get("edit")}</a>
+      <a data-method="delete" data-confirm="${s.i18n.get("event.delete.confirm")}"
+        href="${s.url(Controllers.events.destroyUrl, "id" -> item.id)}" rel="nofollow" class="btn btn-danger">${s.i18n.get("delete")}</a>
+    </td>
+  </tr>
+  #end
+</tbody>
+</table>
+
+<a href="${s.url(Controllers.events.newUrl)}" class="btn btn-primary">${s.i18n.get("new")}</a>
