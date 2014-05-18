@@ -15,7 +15,7 @@ object SkinnyAppBuild extends Build {
   // -------------------------------------------------------
 
   val appOrganization = "org.skinny-framework"
-  val appName = "skinny-blank-app"
+  val appName = "atumeru"
   val appVersion = "0.1.0-SNAPSHOT"
 
   val skinnyVersion = "1.0.14"
