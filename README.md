@@ -8,3 +8,7 @@ Run Skinny app now!
 
 http://skinny-framework.org/
 
+
+### アプリ概要
+イベント参加者を集める。
+atndクローンを目指す。
