@@ -1,0 +1,38 @@
+<%@val item: model.EventMember %>
+<%@val s: skinny.Skinny %>
+
+<%-- Be aware of package imports.
+ 1. src/main/scala/templates/ScalatePackage.scala
+ 2. scalateTemplateConfig in project/Build.scala
+--%>
+
+<h3>${s.i18n.get("eventMember.detail")}</h3>
+<hr/>
+#for (notice <- s.flash.notice)
+  <p class="alert alert-info">${notice}</p>
+#end
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th>${s.i18n.get("eventMember.id")}</th>
+    <td>${item.id}</td>
+  </tr>
+  <tr>
+    <th>${s.i18n.get("eventMember.event_id")}</th>
+    <td>${item.event_id}</td>
+  </tr>
+  <tr>
+    <th>${s.i18n.get("eventMember.member_id")}</th>
+    <td>${item.member_id}</td>
+  </tr>
+
+</tbody>
+</table>
+
+<hr/>
+<div class="form-actions">
+  <a class="btn btn-default" href="${s.url(Controllers.eventMembers.indexUrl)}">${s.i18n.get("backToList")}</a>
+  <a href="${s.url(Controllers.eventMembers.editUrl, "id" -> item.id)}" class="btn btn-info">${s.i18n.get("edit")}</a>
+  <a data-method="delete" data-confirm="${s.i18n.get("eventMember.delete.confirm")}"
+    href="${s.url(Controllers.eventMembers.destroyUrl, "id" -> item.id)}" rel="nofollow" class="btn btn-danger">${s.i18n.get("delete")}</a>
+</div>

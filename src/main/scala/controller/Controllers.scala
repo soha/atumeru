@@ -6,6 +6,7 @@ import skinny.controller.AssetsController
 object Controllers {
 
   def mount(ctx: ServletContext): Unit = {
+    eventMembers.mount(ctx)
     members.mount(ctx)
     events.mount(ctx)
     root.mount(ctx)
@@ -19,6 +20,9 @@ object Controllers {
   }
 
   object members extends _root_.controller.MembersController {
+  }
+
+  object eventMembers extends _root_.controller.EventMembersController {
   }
 
 }
