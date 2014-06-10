@@ -1,5 +1,54 @@
-<h3>Welcome</h3>
+<%@val s: skinny.Skinny %>
+<%@val items: Seq[model.Event] %>
+<%@val totalPages: Int %>
+
+<h3>${s.i18n.get("event.list")}</h3>
 <hr/>
-<p class="alert alert-success">
-  <strong>TODO:</strong> This is an auto-generated file by <a href="http://skinny-framework.org/">Skinny framework</a>!<br/>
-</p>
+#for (notice <- s.flash.notice)
+  <p class="alert alert-info">${notice}</p>
+#end
+
+totalPages:${totalPages}
+#if (totalPages > 1)
+  <ul class="pagination">
+    <li>
+      <a href="${s.url(Controllers.join.indexUrl, "page" -> 1)}">&laquo;</a>
+    </li>
+    #for (i <- (1 to totalPages))
+      <li>
+        <a href="${s.url(Controllers.join.indexUrl, "page" -> i)}">${i}</a>
+      </li>
+    #end
+    <li>
+      <a href="${s.url(Controllers.join.indexUrl, "page" -> totalPages)}">&raquo;</a>
+    </li>
+  </ul>
+#end
+
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th>${s.i18n.get("event.id")}</th>
+    <th>${s.i18n.get("event.title")}</th>
+    <th>${s.i18n.get("event.startDateTime")}</th>
+    <th>${s.i18n.get("event.endDateTime")}</th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  #for (item <- items)
+  <tr>
+    <td>${item.id}</td>
+    <td>${item.title}</td>
+    <td>${item.startDateTime}</td>
+    <td>${item.endDateTime}</td>
+    <td>
+      <a href="${s.url(Controllers.events.showUrl, "id" -> item.id)}" class="btn btn-default">${s.i18n.get("detail")}</a>
+      <a href="${s.url(Controllers.events.editUrl, "id" -> item.id)}" class="btn btn-info">${s.i18n.get("edit")}</a>
+    </td>
+  </tr>
+  #end
+</tbody>
+</table>
+
+<a href="${s.url(Controllers.events.newUrl)}" class="btn btn-primary">${s.i18n.get("new")}</a>
