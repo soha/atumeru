@@ -15,6 +15,8 @@ class ScalatraBootstrap extends SkinnyLifeCycle {
   }
 
   override def initSkinnyApp(ctx: ServletContext) {
+    Controllers.join.mount(ctx)
+
     // http://skinny-framework.org/documentation/worker_jobs.html
     //skinnyWorkerService.everyFixedSeconds(worker, 3)
 

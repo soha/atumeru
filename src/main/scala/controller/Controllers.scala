@@ -4,6 +4,10 @@ import skinny._
 import skinny.controller.AssetsController
 
 object Controllers {
+  object join extends _root_.controller.JoinController with Routes {
+    val indexUrl = get("/join/?")(index).as('index)
+  }
+
 
   def mount(ctx: ServletContext): Unit = {
     members.mount(ctx)
