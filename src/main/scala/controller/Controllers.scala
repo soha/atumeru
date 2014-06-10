@@ -5,7 +5,7 @@ import skinny.controller.AssetsController
 
 object Controllers {
   object join extends _root_.controller.JoinController with Routes {
-    val indexUrl = get("/join/?")(index).as('index)
+    val indexUrl = get("/join")(index).as('index)
   }
 
 
